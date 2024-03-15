@@ -5,7 +5,7 @@
 {{- if .Values.argocd.applicationSet.identifier }}
 {{- $identifier = printf "-%s" $.Values.argocd.applicationSet.identifier}}
 {{- end }}
-#{{- if .Values.argocd.applicationSet.enabled }}
+{{- if .Values.argocd.applicationSet.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
