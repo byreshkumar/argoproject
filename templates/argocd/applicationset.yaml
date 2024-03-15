@@ -19,49 +19,42 @@ spec:
           - appName: {{ printf "%s-%s%s" $.Values.argocd.environment .name $identifier }}
             namespace: {{ .namespace }}
             path: {{ .path }}
-            {{- if eq  $.Values.argocd.overrideParameters true }}
-            {{- if .subnets }}
-            subnets: {{ .subnets }}
-            certificate: {{ .certificate }}
-            {{- else }}
-            subnets: {{ $.Values.argocd.subnets}}
-            certificate: {{ $.Values.argocd.certificate}}
-            {{- end }}
-            {{- end }}
         {{- end }}
   template:
     metadata:
       name: '{{ "{{appName}}" }}'
-      annotations:
-        argocd.argoproj.io/manifest-generate-paths: .
+      #annotations:
+        #argocd.argoproj.io/manifest-generate-paths: .
     spec:
-      project: {{$projectName}}-project
+      #project: {{$projectName}}-project
+      project: default
       source:
         repoURL: {{ $.Values.argocd.applicationSet.repo }}
         targetRevision: main
         path: '{{ "{{path}}" }}'
-        helm:
-          passCredentials: true
-          releaseName: '{{ "{{appName}}" }}'
-          valueFiles:
-            {{- toYaml $.Values.argocd.valueFiles | nindent 12 }}
-          {{- if eq  $.Values.argocd.overrideParameters true }}
-          parameters:
-            - name: ingress.subnets
-              value: '{{ "{{subnets}}" }}'
-            - name: ingress.certificateArn
-              value: '{{ "{{certificate}}" }}'
-          {{- end }}
+        # helm:
+          # passCredentials: true
+          # releaseName: '{{ "{{appName}}" }}'
+          # valueFiles:
+            # {{- toYaml $.Values.argocd.valueFiles | nindent 12 }}
+          # {{- if eq  $.Values.argocd.overrideParameters true }}
+          # parameters:
+            # - name: ingress.subnets
+              # value: '{{ "{{subnets}}" }}'
+            # - name: ingress.certificateArn
+              # value: '{{ "{{certificate}}" }}'
+          # {{- end }}
       destination:
-        name: {{ $.Values.argocd.applicationSet.destinationName }}
+        #name: {{ $.Values.argocd.applicationSet.destinationName }}
+        server: {{ $.Values.argocd.applicationSet.destinationName }}
         namespace: '{{ "{{namespace}}" }}'
-      syncPolicy:
-      {{- if eq  $disableAutoSync false }}
-        automated:
-          prune: true
-          selfHeal: true
-      {{- end }}
-        syncOptions:
-          - CreateNamespace=true
-          - PrunePropagationPolicy=background
+      # syncPolicy:
+      # {{- if eq  $disableAutoSync false }}
+        # automated:
+          # prune: true
+          # selfHeal: true
+      # {{- end }}
+        # syncOptions:
+          # - CreateNamespace=true
+          # - PrunePropagationPolicy=background
 {{- end }}
