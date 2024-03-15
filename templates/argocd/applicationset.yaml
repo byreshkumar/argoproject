@@ -36,23 +36,23 @@ spec:
           releaseName: '{{ "{{appName}}" }}'
           valueFiles:
             {{- toYaml $.Values.argocd.valueFiles | nindent 12 }}
-          {{- if eq  $.Values.argocd.overrideParameters true }}
-          parameters:
-            - name: ingress.subnets
-              value: '{{ "{{subnets}}" }}'
-            - name: ingress.certificateArn
-              value: '{{ "{{certificate}}" }}'
-          {{- end }}
+          # {{- if eq  $.Values.argocd.overrideParameters true }}
+          # parameters:
+            # - name: ingress.subnets
+              # value: '{{ "{{subnets}}" }}'
+            # - name: ingress.certificateArn
+              # value: '{{ "{{certificate}}" }}'
+          # {{- end }}
       destination:
         name: {{ $.Values.argocd.applicationSet.destinationName }}
         namespace: '{{ "{{namespace}}" }}'
-      syncPolicy:
-      {{- if eq  $disableAutoSync false }}
-        automated:
-          prune: true
-          selfHeal: true
-      {{- end }}
-        syncOptions:
-          - CreateNamespace=true
-          - PrunePropagationPolicy=background
+      # syncPolicy:
+      # {{- if eq  $disableAutoSync false }}
+        # automated:
+          # prune: true
+          # selfHeal: true
+      # {{- end }}
+        # syncOptions:
+          # - CreateNamespace=true
+          # - PrunePropagationPolicy=background
 {{- end }}
