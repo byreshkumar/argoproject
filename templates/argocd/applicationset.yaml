@@ -26,7 +26,7 @@ spec:
       annotations:
         argocd.argoproj.io/manifest-generate-paths: .
     spec:
-      project: {{$projectName}}-project
+      project: default
       source:
         repoURL: {{ $.Values.argocd.applicationSet.repo }}
         targetRevision: main
