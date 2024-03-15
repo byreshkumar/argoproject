@@ -17,7 +17,7 @@ argocd:
     path: app-of-apps-chart
 
   applicationSet:
-    enabled: false
+    enabled: true
     destinationName: https://kubernetes.default.svc
     repo: https://github.com/byreshkumar/argoproject.git
 
