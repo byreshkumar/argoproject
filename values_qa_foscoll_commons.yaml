@@ -22,7 +22,7 @@ argocd:
 
   applicationSet:
     enabled: true
-    destinationName: https://kubernetes.default.svc
+    destinationName: in-cluster
     repo: https://github.com/byreshkumar/argoproject.git
 
   project:
