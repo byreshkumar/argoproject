@@ -1,10 +1,10 @@
-{{-  $projectName := printf "%s" $.Values.argocd.project.name -}}
-{{- $disableAutoSync := .Values.argocd.applicationSet.disableAutoSync | default false }}
-{{- $env := .Values.argocd.environment }}
-{{- $identifier := "" }}
-{{- if .Values.argocd.applicationSet.identifier }}
-{{- $identifier = printf "-%s" $.Values.argocd.applicationSet.identifier}}
-{{- end }}
+# {{-  $projectName := printf "%s" $.Values.argocd.project.name -}}
+# {{- $disableAutoSync := .Values.argocd.applicationSet.disableAutoSync | default false }}
+# {{- $env := .Values.argocd.environment }}
+# {{- $identifier := "" }}
+# {{- if .Values.argocd.applicationSet.identifier }}
+# {{- $identifier = printf "-%s" $.Values.argocd.applicationSet.identifier}}
+# {{- end }}
 {{- if .Values.argocd.applicationSet.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
