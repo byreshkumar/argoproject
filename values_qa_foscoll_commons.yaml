@@ -7,6 +7,10 @@ argocd:
   namespace: argocd
   environment: qa
 
+  valueFiles:
+  - values.yaml
+  #- values_qa.yaml
+  
   apps:
   - name: nginx-chart
     namespace: qa
