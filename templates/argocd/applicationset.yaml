@@ -32,11 +32,11 @@ spec:
         repoURL: {{ $.Values.argocd.applicationSet.repo }}
         targetRevision: main
         path: '{{ "{{path}}" }}'
-        # helm:
-          # passCredentials: true
-          # releaseName: '{{ "{{appName}}" }}'
-          # valueFiles:
-            # {{- toYaml $.Values.argocd.valueFiles | nindent 12 }}
+        helm:
+          passCredentials: true
+          releaseName: '{{ "{{appName}}" }}'
+          valueFiles:
+            {{- toYaml $.Values.argocd.valueFiles | nindent 12 }}
           # {{- if eq  $.Values.argocd.overrideParameters true }}
           # parameters:
             # - name: ingress.subnets
