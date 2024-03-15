@@ -1,0 +1,16 @@
+{{-  $projectName := $.Values.argocd.project.name -}}
+{{- $createResources := .Values.argocd.project.create | default false }}
+{{- if $createResources }}
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+    name: {{ $projectName }}-project
+    namespace: {{ .Values.argocd.namespace }}
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+    description: {{ $projectName }} Project
+    sourceRepos: {{ toYaml .Values.argocd.project.repos | nindent 4 }}
+    destinations: {{ toYaml .Values.argocd.project.destinations | nindent 4 }}
+    sourceNamespaces: {{ toYaml .Values.argocd.project.sourceNamespaces | nindent 4 }}
+{{- end }}

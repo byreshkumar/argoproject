@@ -1,0 +1,26 @@
+namespace:
+  create: false
+  name: qa
+
+argocd:
+  create: true
+  namespace: argocd
+  environment: qa
+
+  apps:
+  - name: nginx-chart
+    namespace: qa
+    path: nginx-chart
+
+  - name: app-of-apps-chart
+    namespace: qa
+    path: app-of-apps-chart
+
+  applicationSet:
+    enabled: true
+    destinationName: https://kubernetes.default.svc
+    repo: https://github.com/byreshkumar/argoproject.git
+
+  project:
+    create: false
+    name: foscoll
